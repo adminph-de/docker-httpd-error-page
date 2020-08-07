@@ -1,0 +1,18 @@
+# mft-gw-stack.yml
+version: '3.7'
+services:
+  http:
+    image: httpd:latest
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - "/media/mnt/error404:/usr/local/apache2/htdocs"
+    deploy:
+      placement:
+        constraints: [node.role == worker]
+    networks:
+       - http_frontend
+
+networks:
+   http_frontend:
